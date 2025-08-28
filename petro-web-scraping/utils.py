@@ -1,0 +1,1 @@
+states = ["Federal Territory of Kuala Lumpur", "Putrajaya", "Selangor", "Johor", "Melaka", "Negeri Sembilan", "Pahang", "Terengganu", "Kelantan", "Perak", "Perlis", "Kedah", "Penang", "Langkawi", "Sabah", "Sarawak", "Labuan"]
