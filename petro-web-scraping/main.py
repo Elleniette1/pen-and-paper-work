@@ -123,7 +123,7 @@ t = 1
 time.sleep(5)
 print("Number of Towns: ", len(utils.states))
 #for key in utils.categories:
-key = utils.categories['cafemesra']
+key = utils.categories['grabmesra']
 driver.refresh()
 print(f"Category: {key}\n","="*40)
 time.sleep(2)
@@ -143,7 +143,7 @@ for p in range(len(utils.states)):
     time.sleep(1.5)
     t += 1
 a = pd.DataFrame(list_of_outlets_uncleaned).drop_duplicates(subset=[0,1]).reset_index(drop=True)
-a.to_excel(f"petro-web-scraping\mesraoutlets-up-to-cafemesra.xlsx")
+a.to_excel(f"petro-web-scraping\mesraoutlets-up-to-grabmesra.xlsx")
 
 n=1
 full_list = pd.DataFrame(list_of_outlets_uncleaned).drop_duplicates(subset=[0,1]).reset_index(drop=True)
