@@ -129,7 +129,7 @@ print(f"Category: {key}\n","="*40)
 time.sleep(2)
 filter_press()
 time.sleep(1)
-option_press(key)
+#option_press(key)
 time.sleep(1)
 apply_press()
 for p in range(len(utils.states)):
@@ -143,12 +143,12 @@ for p in range(len(utils.states)):
     time.sleep(1.5)
     t += 1
 a = pd.DataFrame(list_of_outlets_uncleaned).drop_duplicates(subset=[0,1]).reset_index(drop=True)
-a.to_excel(f"petro-web-scraping\mesraoutlets-up-to-grabmesra.xlsx")
+a.to_excel(f"petro-web-scraping\qalloutlets-up-no-mesra.xlsx")
 
 n=1
 full_list = pd.DataFrame(list_of_outlets_uncleaned).drop_duplicates(subset=[0,1]).reset_index(drop=True)
 full_list = pd.concat([full_append, full_list]).drop_duplicates(subset=[0,1]).reset_index(drop=True)
-full_list.to_excel("petro-web-scraping\mesraoutletsperwebsite.xlsx")
+full_list.to_excel("petro-web-scraping\sallstationperwebsite.xlsx")
 print(full_list)
 time.sleep(10)
 driver.quit()
