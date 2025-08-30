@@ -75,6 +75,9 @@ def searchbar(xtown):
     input_bar.send_keys(utils.states[xtown])
     while True:
         try:
+            driver.find_element(By.XPATH, '//body').send_keys(Keys.CONTROL + Keys.HOME)
+            action.pointer_action.move_to_location(0, 0)
+            input_bar.click()
             WebDriverWait(driver, 1).until(
                 EC.element_to_be_clickable((By.XPATH, "//*[@id='htmltag']/body/div[13]/div[1]/span[2]"))
             )
@@ -85,10 +88,11 @@ def searchbar(xtown):
             driver.find_element(By.XPATH, '//body').send_keys(Keys.CONTROL + Keys.HOME)
             action.pointer_action.move_to_location(0, 0)
             
-            
-            
-            input_bar.click()
             try:
+                driver.find_element(By.XPATH, '//body').send_keys(Keys.CONTROL + Keys.HOME)
+                action.pointer_action.move_to_location(0, 0)
+                action.perform()
+                input_bar.click()
                 WebDriverWait(driver, 1).until(
                     EC.element_to_be_clickable((By.XPATH, "//*[@id='htmltag']/body/div[14]/div[1]/span[2]"))
                 )
@@ -99,7 +103,7 @@ def searchbar(xtown):
             pass
         
 
-def exhaust_pages(bandar):
+def exhaust_pages():
     try:
         WebDriverWait(driver, 1).until(
             EC.visibility_of_element_located((By.CLASS_NAME, "page-transition-cover.preload-cover"))
@@ -110,7 +114,8 @@ def exhaust_pages(bandar):
         WebDriverWait(driver, 3).until(
             EC.element_to_be_clickable((By.XPATH, "//*[@id='lst-assets']/div/div[1]/div[1]/div/div/div/div[1]/div/div[2]/div/div[1]/div"))
         )
-        
+        bandar = str(driver.find_element(By.XPATH, "//*[@id='lbl-looking-for']/div/div").text)
+        bandar = bandar.split("Your location is ")[1].split(". Here is what you are looking for:")[0]
         while True:
             for i in range(9):
                 try:
@@ -140,24 +145,28 @@ def exhaust_pages(bandar):
 
 # ==================================== MAIN PROGRAM ==============================================
 t = 1
-time.sleep(5)
+
 #category = "fnb"
 for category in utils.categories:
+    time.sleep(5)
     list_of_outlets_uncleaned = []
     print("Number of Towns: ", len(utils.states))
     key = utils.categories[category]
     driver.refresh()
+    time.sleep(1)
     print(f"Category: {category}\n","="*40)
     option_press(key)
 
     for town in range(0,len(utils.states),1):
         print(f"{t}. Searching Town: ", utils.states[town])
         searchbar(town)
-        exhaust_pages(utils.states[town])
+        exhaust_pages()
         t += 1
 
     a = pd.DataFrame(list_of_outlets_uncleaned).drop_duplicates(subset=[0,1]).reset_index(drop=True)
     print("Number of Unique Rows: ", a.shape[0])
+    b = pd.DataFrame()
+    b[category] = a.shape[0]
     a.to_excel(f"petro-web-scraping\petronasfinalfiles\mesraoutlets-up-to-{category}.xlsx")
 # ===============================================================================================
 
@@ -165,6 +174,7 @@ for category in utils.categories:
 full_list = pd.DataFrame(list_of_outlets_uncleaned).drop_duplicates(subset=[0,1]).reset_index(drop=True)
 full_list = pd.concat([full_append, full_list]).drop_duplicates(subset=[0,1]).reset_index(drop=True)
 full_list.to_excel("petro-web-scraping\mesraoutletsperwebsite.xlsx")
+print(b)
 print(full_list)
 driver.quit()
 # ===============================================================================================
