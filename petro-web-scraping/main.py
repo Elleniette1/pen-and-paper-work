@@ -167,14 +167,10 @@ for category in utils.categories:
     print("Number of Unique Rows: ", a.shape[0])
     b = pd.DataFrame()
     b[category] = a.shape[0]
-    a.to_excel(f"petro-web-scraping\petronasfinalfiles\mesraoutlets-up-to-{category}.xlsx")
+    a.drop(0, axis=1).to_excel(f"petro-web-scraping\petronasfinalfiles\mesraoutlets-up-to-{category}.xlsx")
 # ===============================================================================================
 
 # ==================================== FINAL CLEANUP & EXPORT ===================================
-full_list = pd.DataFrame(list_of_outlets_uncleaned).drop_duplicates(subset=[0,1]).reset_index(drop=True)
-full_list = pd.concat([full_append, full_list]).drop_duplicates(subset=[0,1]).reset_index(drop=True)
-full_list.to_excel("petro-web-scraping\mesraoutletsperwebsite.xlsx")
 print(b)
-print(full_list)
 driver.quit()
 # ===============================================================================================
