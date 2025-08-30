@@ -14,15 +14,15 @@ states = ["Kuala Lumpur", "Putrajaya","Labuan Federal Territory",
           'Kuching, Sarawak','Miri, Sarawak','Sibu, Sarawak','Bintulu, Sarawak','Limbang, Sarawak','Sarikei, Sarawak','Sri Aman, Sarawak','Kapit, Sarawak','Kota Samarahan, Sarawak'
 ]
 
-categories = {"segarmesra":"//*[@id='pnl-filter']/div/div/div[1]/div/div[3]/div/div/div/div[2]/div/div/div/div/div[1]/ul/li[3]/label/span[1]/img",
+categories = {"all":"",
+              "segarmesra":"//*[@id='pnl-filter']/div/div/div[1]/div/div[3]/div/div/div/div[2]/div/div/div/div/div[1]/ul/li[3]/label/span[1]/img",
               "makanmesra":"//*[@id='pnl-filter']/div/div/div[1]/div/div[3]/div/div/div/div[2]/div/div/div/div/div[1]/ul/li[2]/label/span[1]/img",
               "cafemesra":"//*[@id='pnl-filter']/div/div/div[1]/div/div[3]/div/div/div/div[2]/div/div/div/div/div[1]/ul/li[1]/label/span[1]/img",
               "grabmesra":"//*[@id='service']/div/div[1]/ul/li[10]/label/span[2]",
               "morningsmesra":"//*[@id='pnl-filter']/div/div/div[1]/div/div[3]/div/div/div/div[2]/div/div/div/div/div[1]/ul/li[11]/label/span[1]/img",
               "epayment":"//*[@id='service']/div/div[1]/ul/li[4]/label/span[2]",
               "setel":"//*[@id='service']/div/div[1]/ul/li[2]/label/span[2]",
-              "fnb":"//*[@id='pnl-filter']/div/div/div[1]/div/div[3]/div/div/div/div[2]/div/div/div/div/div[1]/ul/li[15]/label/span[1]/img",
-              "all":"//*[@id='pnl-filter']/div/div/div[1]/div/div[3]/div/div/div/div[2]/div/div/div/div/div[1]/ul/li[15]/label/span[1]/img"
+              "fnb":"//*[@id='pnl-filter']/div/div/div[1]/div/div[3]/div/div/div/div[2]/div/div/div/div/div[1]/ul/li[15]/label/span[1]/img"
               }
 
 print("utils.py loaded!")

@@ -128,12 +128,14 @@ def exhaust_pages():
             )
             bandar = str(driver.find_element(By.XPATH, "//*[@id='lbl-looking-for']/div/div").text)
             bandar = bandar.split("Your location is ")[1].split(". Here is what you are looking for:")[0]
+            noa = 0
             while True:
                 for i in range(9):
                     try:
                         nama_outlet = driver.find_element(By.XPATH, f"//*[@id='lst-assets']/div/div[1]/div[{i+1}]/div/div/div/div[1]/div/div[2]/div/div[1]/div").text
                         address_outlet = driver.find_element(By.XPATH, f"//*[@id='lst-assets']/div/div[1]/div[{i+1}]/div/div/div/div[1]/div/div[2]/div/div[2]/div").text
-                        print(nama_outlet, address_outlet)
+                        noa += 1
+                        print(f"    {noa}.",nama_outlet, address_outlet)
                         list_of_outlets_uncleaned.append([nama_outlet, address_outlet, bandar])
                     except:
                         break
@@ -161,22 +163,25 @@ def exhaust_pages():
                 )
             bandar = str(driver.find_element(By.XPATH, "//*[@id='lbl-looking-for']/div/div").text)
             bandar = bandar.split("Your location is ")[1].split(". Here is what you are looking for:")[0]
+            noa = 0
+            time.sleep(3)
             while True:
                 for i in range(9):
                     try:
                         nama_outlet = driver.find_element(By.XPATH, f"//*[@id='lst-assets']/div/div[1]/div[{i+1}]/div/div/div/div[1]/div/div[2]/div/div[1]/div").text
                         address_outlet = driver.find_element(By.XPATH, f"//*[@id='lst-assets']/div/div[1]/div[{i+1}]/div/div/div/div[1]/div/div[2]/div/div[2]/div").text
-                        print(nama_outlet, address_outlet)
+                        noa += 1
+                        print(f"    {noa}.",nama_outlet, address_outlet)
                         list_of_outlets_uncleaned.append([nama_outlet, address_outlet, bandar])
                     except:
                         break
                 try:
-                    WebDriverWait(driver, 0.2).until(
+                    WebDriverWait(driver, 1).until(
                         EC.element_to_be_clickable((By.CLASS_NAME, "next_link"))
                     )
                     next_button = driver.find_element(By.CLASS_NAME, "next_link")
                     next_button.click()
-                    time.sleep(0.7)
+                    time.sleep(1)
                 except:
                     break
         except:
@@ -205,11 +210,13 @@ for category in utils.categories:
         print(" ")
         t += 1
 
-    a = pd.DataFrame(list_of_outlets_uncleaned).drop_duplicates(subset=[0,1]).reset_index(drop=True)
+    a = pd.DataFrame(list_of_outlets_uncleaned).drop_duplicates(subset=[0,1])
+    a.columns = ["outlet_name", "outlet_address", "locator_town"]
     print("Number of Unique Rows: ", a.shape[0])
     b = pd.DataFrame()
     b[category] = a.shape[0]
-    a.drop(0, axis=1).to_excel(f"petro-web-scraping\petronasfinalfiles\mesraoutlets-up-to-{category}.xlsx")
+    print(a)
+    a.to_excel(f"petro-web-scraping\petronasfinalfiles\mesraoutlets-up-to-{category}.xlsx", index=False)
 # ===============================================================================================
 
 # ==================================== FINAL CLEANUP & EXPORT ===================================
