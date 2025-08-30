@@ -28,8 +28,6 @@ options.add_argument("--log-level=3")
 driver = webdriver.Chrome(service=service, options=options)
 action = ActionBuilder(driver)
 driver.get("https://www.mymesra.com.my/petrol-station-finder")
-full_append = pd.read_excel("petro-web-scraping\mesraoutletsperwebsite.xlsx", engine='openpyxl',index_col=0)
-print(full_append)
 
 # Closing Cookies Popup
 WebDriverWait(driver, 15).until(
